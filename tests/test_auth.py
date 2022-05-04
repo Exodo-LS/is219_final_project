@@ -61,3 +61,11 @@ def test_registration_form_password_criteria(client):
         User.password = test_pass
         if len(User.password) < 6 or len(User.password) > 35:
             assert 'Please lengthen this text to 6 characters or more' in response.data
+
+
+def test_registration_form_already_registered(client):
+    """ Unit Test for Already Registered"""
+    response = client.get("/register")
+    test_user = 'IS219_TestUser@email.com'
+    if User.email is not None and User.email == test_user:
+        assert 'Already Registered' in response.data
