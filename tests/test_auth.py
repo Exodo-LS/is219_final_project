@@ -42,3 +42,12 @@ def test_registration_form_email(client):
         User.email = test_email
         if '@' not in User.email:
             assert 'Please include an ' @ ' in the email address' in response.data
+
+
+def test_registration_form_password_confirm(client):
+    """ Unit Test for Password Confirmation"""
+    response = client.post("/register")
+    test_password = 'Dummy_Pass_123'
+    if User.email is not None:
+        if User.password == test_password:
+            assert 'Congratulations, you are now a registered user!' in response.data
