@@ -3,7 +3,8 @@ COPY requirements.txt .
 ENV FLASK_APP=app
 ENV PORT=5000
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=development
+ENV FLASK_ENV=production
+ENV DATABASE_URL=sqlite:////home/myuser/database/db.sqlite
 ENV PATH="/home/myuser/.local/bin:${PATH}"
 RUN apt-get update &&\
     /usr/local/bin/python3 -m pip install --upgrade pip &&\
@@ -12,4 +13,4 @@ RUN apt-get update &&\
     adduser myuser
 WORKDIR /home/myuser
 COPY --chown=myuser:myuser . .
-#CMD gunicorn -w 4 --bind 0.0.0.0:$PORT "app:create_app()"
+CMD gunicorn -w 4 --bind 0.0.0.0:$PORT "app:create_app()"

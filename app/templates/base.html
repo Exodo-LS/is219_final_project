@@ -10,7 +10,6 @@
             <!-- Bootstrap CSS -->
             {{ bootstrap.load_css() }}
         {% endblock %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
         <title>My Site - {% block title %}{% endblock %}</title>
     {% endblock %}
@@ -34,9 +33,7 @@
                     <div class="navbar-nav mr-auto">
                         {% if current_user.is_authenticated %}
                             {{ render_nav_item('auth.dashboard','Dashboard' ) }}
-                            {% if current_user.is_admin %}
-                                {{ render_nav_item('auth.browse_users','User Management' ) }}
-                            {% endif %}
+                            {{ render_nav_item('auth.browse_users','User Management' ) }}
 
                         {% else %}
                             {{ render_nav_item('simple_pages.index', 'Home') }}
