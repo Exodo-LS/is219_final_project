@@ -51,3 +51,13 @@ def test_registration_form_password_confirm(client):
     if User.email is not None:
         if User.password == test_password:
             assert 'Congratulations, you are now a registered user!' in response.data
+
+
+def test_registration_form_password_criteria(client):
+    """ Unit Test for Password Criteria Check"""
+    response = client.post("/register")
+    test_pass = 'bad'
+    if User.email is None:
+        User.password = test_pass
+        if len(User.password) < 6 or len(User.password) > 35:
+            assert 'Please lengthen this text to 6 characters or more' in response.data
