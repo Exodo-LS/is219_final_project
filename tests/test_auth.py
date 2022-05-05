@@ -69,3 +69,15 @@ def test_registration_form_already_registered(client):
     test_user = 'IS219_TestUser@email.com'
     if User.email is not None and User.email == test_user:
         assert 'Already Registered' in response.data
+
+
+def test_dashboard_authentication(client):
+    """ Unit Test for Dashboard Authentication"""
+    response = client.post("/dashboard")
+    test_user = 'IS219_TestUser@email.com'
+    test_password = 'Dummy_Pass_123'
+    if User.email == test_user and User.password == test_password:
+        if User.authenticated:
+            assert 'User Authenticated' in response.data
+    elif not User.authenticated:
+        assert 'User Not Authenticated' in response.data
