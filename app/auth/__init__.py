@@ -24,7 +24,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            flash("Welcome", 'success')
+            flash('Login Successful')
             return redirect(url_for('auth.dashboard'))
     return render_template('login.html', form=form)
 
