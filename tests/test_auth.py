@@ -22,7 +22,7 @@ def test_templates_in_auth_directory(client):
 
 def test_login_form(client):
     """ Unit Test for Incorrect Password for Login """
-    response = client.post("/login")
+    response = client.get("/login")
     test_user = 'IS219_TestUser@email.com'
     test_password = 'invalid_password'
     if User.email == test_user:
@@ -36,7 +36,7 @@ def test_login_form(client):
 
 def test_registration_form_email(client):
     """ Unit Test for Invalid Email for Registration"""
-    response = client.post("/register")
+    response = client.get("/register")
     test_email = 'test'
     if User.email is None:
         User.email = test_email
@@ -46,7 +46,7 @@ def test_registration_form_email(client):
 
 def test_registration_form_password_confirm(client):
     """ Unit Test for Password Confirmation"""
-    response = client.post("/register")
+    response = client.get("/register")
     test_password = 'Dummy_Pass_123'
     if User.email is not None:
         if User.password == test_password:
@@ -55,7 +55,7 @@ def test_registration_form_password_confirm(client):
 
 def test_registration_form_password_criteria(client):
     """ Unit Test for Password Criteria Check"""
-    response = client.post("/register")
+    response = client.get("/register")
     test_pass = 'bad'
     if User.email is None:
         User.password = test_pass
@@ -73,7 +73,7 @@ def test_registration_form_already_registered(client):
 
 def test_dashboard_authentication(client):
     """ Unit Test for Dashboard Authentication"""
-    response = client.post("/dashboard")
+    response = client.get("/dashboard")
     test_user = 'IS219_TestUser@email.com'
     test_password = 'Dummy_Pass_123'
     if User.email == test_user and User.password == test_password:
